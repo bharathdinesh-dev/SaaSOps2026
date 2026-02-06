@@ -3,6 +3,10 @@ package saasOpsTestBase;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -20,10 +24,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
+import saasOpsPageObjects.ZoneLoginPOC;
+import saasOpsUtilities.WaitUtils;
+
 public class SaasOpsBaseClass {
 	public WebDriver driver;
 	public Logger logger;
 	public Properties p;
+	public ZoneLoginPOC logObj;
+	public WaitUtils wait;
 	
 	@BeforeClass
 	public void setup() throws IOException {
@@ -37,10 +46,11 @@ public class SaasOpsBaseClass {
 		
 //		initiate driver 
 		driver = new ChromeDriver();
+		wait=new WaitUtils(driver);
 		driver.manage().deleteAllCookies();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		driver.get(p.getProperty("provisioning_url"));
+		driver.get(getUrl());
 	}
 //	@AfterClass
 	public void tearDown() {
@@ -81,11 +91,79 @@ public class SaasOpsBaseClass {
 		return targetFilePath;
 
 	}
+	public String getMfaFromDB(String datee, String email, String dburl, String username, String password) {
+
+		String mfaCode = null;
+	    String accountId = null;
+
+	    String query = "SELECT VERIFICATIONCODE, ACCOUNTID " +
+	                   "FROM c_identitycode " +
+	                   "WHERE USERNAME=? AND TYPE='Forget' AND STATUS='Active' AND CREATED_DATE >? " +
+	                   "ORDER BY CREATED_DATE DESC LIMIT 1";
+
+	    String updateQuery = "UPDATE c_users SET mfaenabled='false' WHERE AccountID = ?";
+
+	    try {
+	        // Load MySQL Driver mfaenabled
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+
+	        // Create Connection
+	        Connection con = DriverManager.getConnection(dburl, username, password);
+
+	        // Prepare Statement
+	        PreparedStatement ps = con.prepareStatement(query);
+	        ps.setString(1, email);
+	        ps.setString(2, datee);
+
+	        // Execute Query
+	        ResultSet rs = ps.executeQuery();
+
+	        // Read Result
+	        if (rs.next()) {
+	        	
+	            mfaCode = rs.getString("VERIFICATIONCODE");
+	            accountId = rs.getString("ACCOUNTID");
+
+	            System.out.println("MFA Code: " + mfaCode);
+	            System.out.println("Account ID: " + accountId);
+
+	            /* --------- NEW EDIT FUNCTIONALITY START --------- */
+	            PreparedStatement updatePs = con.prepareStatement(updateQuery);
+	            updatePs.setString(1, accountId);
+	            int updatedRows = updatePs.executeUpdate();
+
+	            System.out.println("MFA Disabled Successfully : " + updatedRows);
+	            updatePs.close();
+	            /* --------- NEW EDIT FUNCTIONALITY END --------- */
+	        } 
+	        else {
+	            System.out.println("No record found");
+	        }
+
+	        // Close connections
+	        rs.close();
+	        ps.close();
+	        con.close();
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return mfaCode;
+	}
 	public  String getCurrentDbDateTime() {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return now.format(formatter);
     }
+	public String getUrl() {
+		return p.getProperty("zone_url");
+	}
+	public void LoginToZone(String email,String pwd) {
+		logObj = new ZoneLoginPOC(driver);
+		logObj.enterUsername(email);
+		logObj.enterpassword(pwd);
+		logObj.clickSignIn();
+	}
 	
 	
 }

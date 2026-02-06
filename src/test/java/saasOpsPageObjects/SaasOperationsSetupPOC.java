@@ -13,6 +13,7 @@ public class SaasOperationsSetupPOC extends BasePage{
 //	******************************************************************LOCATORS***************************************************************************************************************************************************************************
 	
 //	Main menu and setup buttons
+	@FindBy(id="menuCLinkForm:createAppProfile") public WebElement plusIcon_menu;
 	@FindBy(id="menuCLinkForm:appsaascCmdLink") public WebElement saas_operations_menu;
 	@FindBy(id="Open_create_application_profile_btn") public WebElement setup_application_profile_btn;
 	@FindBy(xpath="//button[contains(@id,'selectsaasprofileFlowForm:create_application_profile_btn_slid')]") public WebElement setup_application_profile_dropdown;
@@ -54,6 +55,10 @@ public class SaasOperationsSetupPOC extends BasePage{
 //	******************************************************************ACTIONS***************************************************************************************************************************************************************************
 
 	//	Main menu and setup buttons
+	public void clickplusIcon_menu() {
+		plusIcon_menu.click();
+	}
+	
 	public void clickSaasOperationsMenu() {
 		saas_operations_menu.click();
 	}
@@ -124,13 +129,17 @@ public class SaasOperationsSetupPOC extends BasePage{
 	
 //	Application profile creation webelements
 	public void enterGroupName(String grpName) {
+		wait.waitForVisibility(group_name_dropdown);
 		group_name_dropdown.click();
 		group_name_dropdown.clear();
+		wait.waitForClikable(group_name_dropdown);
 		group_name_dropdown.sendKeys(grpName);
 	}
 	public void enterAppName(String appName) {
+		wait.waitForVisibility(app_name_dropdown);
 		app_name_dropdown.click();
 		app_name_dropdown.clear();
+		wait.waitForClikable(app_name_dropdown);
 		app_name_dropdown.sendKeys(appName);
 	}
 	public void enterProfileName(String profileName) {
