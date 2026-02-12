@@ -1,48 +1,62 @@
 package saasOpsPageObjects;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class ZoneWelcomePOC extends BasePage{
 
-	public ZoneWelcomePOC (WebDriver driver) {
-		super(driver);
-	}
-	
-//	Locator
-	@FindBy(id = "menuCLinkForm:dashBoardRootLink_TAB_MENU") WebElement Dashboard_lnk;
-	@FindBy(id = "menuCLinkForm:openchatCloudddCmdLink") WebElement SurpaasAI_lnk;
-	@FindBy(xpath = "//span[contains(text(),'Cloud Ops')]") WebElement CloudOps_lnk;
-	@FindBy(id = "menuCLinkForm:appcCmdLink") WebElement Applications_lnk;
-	@FindBy(id = "menuCLinkForm:saasSuccessDashBoard_TAB_MENU") WebElement SaasSuccess_lnk;
-	@FindBy(id = "menuCLinkForm:appsaascCmdLink") WebElement SaasOpserations_lnk;
-	@FindBy(id = "menuCLinkForm:appMarketizercCmdLink") WebElement Marketizer_lnk;
-	@FindBy(id = "adminli") WebElement Administration_lnk;
-	
-//	Action
-	public void clickDashboard_lnk() {
-		Dashboard_lnk.click();
-	}
-	public void clickSurpaasAI_lnk() {
-		SurpaasAI_lnk.click();
-	}
-	public void clickCloudOps_lnk() {
-		CloudOps_lnk.click();
-	}
-	public void clickApplications_lnk() {
-		Applications_lnk.click();
-	}
-	public void clickSaasSuccess() {
-		SaasSuccess_lnk.click();
-	}
-	public void clickSaasOpserations_lnk() {
-		SaasOpserations_lnk.click();
-	}
-	public void clickMarketizer_lnk() {
-		Marketizer_lnk.click();
-	}
-	public void clickAdministration_lnk() {
-		Administration_lnk.click();
-	}
+    public ZoneWelcomePOC (WebDriver driver) {
+        super(driver);
+    }
+
+    // ******************************************************************LOCATORS***************************************************************************************************************************************************************************
+
+    public By Dashboard_lnk = By.id("menuCLinkForm:dashBoardRootLink_TAB_MENU");
+    public By Dashboard_title = By.xpath("//span[text()='Dashboard'and@class='gui-inline-header']");
+    public By SurpaasAI_lnk = By.id("menuCLinkForm:openchatCloudddCmdLink");
+    public By CloudOps_lnk = By.xpath("//span[contains(text(),'Cloud Ops')]");
+    public By Applications_lnk = By.id("menuCLinkForm:appcCmdLink");
+    public By SaasSuccess_lnk = By.id("menuCLinkForm:saasSuccessDashBoard_TAB_MENU");
+    public By SaasOpserations_lnk = By.id("menuCLinkForm:appsaascCmdLink");
+    public By Marketizer_lnk = By.id("menuCLinkForm:appMarketizercCmdLink");
+    public By Administration_lnk = By.id("adminli");
+
+
+    // ******************************************************************ACTIONS***************************************************************************************************************************************************************************
+
+    public void clickDashboard_lnk() {
+        wait.waitForElementToBeClickable(Dashboard_lnk).click();
+    }
+    
+    public void waitTillDashbordTitleVisibe() {
+        wait.waitForVisibility(Dashboard_title);
+    }
+
+    public void clickSurpaasAI_lnk() {
+        wait.waitForElementToBeClickable(SurpaasAI_lnk).click();
+    }
+
+    public void clickCloudOps_lnk() {
+        wait.waitForElementToBeClickable(CloudOps_lnk).click();
+    }
+
+    public void clickApplications_lnk() {
+        wait.waitForElementToBeClickable(Applications_lnk).click();
+    }
+
+    public void clickSaasSuccess() {
+        wait.waitForElementToBeClickable(SaasSuccess_lnk).click();
+    }
+
+    public void clickSaasOpserations_lnk() {
+        wait.waitForElementToBeClickable(SaasOpserations_lnk).click();
+    }
+
+    public void clickMarketizer_lnk() {
+        wait.waitForElementToBeClickable(Marketizer_lnk).click();
+    }
+
+    public void clickAdministration_lnk() {
+        wait.waitForElementToBeClickable(Administration_lnk).click();
+    }
 }

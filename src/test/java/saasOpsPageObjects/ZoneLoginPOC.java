@@ -1,60 +1,76 @@
 package saasOpsPageObjects;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ZoneLoginPOC extends BasePage{
+public class ZoneLoginPOC extends BasePage {
 
-	public ZoneLoginPOC(WebDriver driver){
-		super(driver);
-	}
+    public ZoneLoginPOC(WebDriver driver) {
+        super(driver);
+    }
 
-	//Locators
-	@FindBy(id = "loginForm:username") WebElement username_txt;
-	@FindBy(id = "loginForm:password") WebElement password_txt;
-	@FindBy(id = "loginForm:loginButton") WebElement signIn_btn;
-	@FindBy(id = "loginForm:forgot") WebElement forgot_lnk;
-	@FindBy(id = "loginForm:provisionURLLink") WebElement create_new_acc_lnk;
-	@FindBy(id = "loginFormBottomButton:one") WebElement home_btn;
-	@FindBy(id = "loginFormBottomButton:two") WebElement support_btn;
-	@FindBy(id = "loginFormBottomButton:marketLink") WebElement marketplace_btn;
-	@FindBy(id = "loginForm:azureAD") WebElement azure_SSO_btn;
-	@FindBy(id = "loginForm:googlessologinForm:username") WebElement google_SSO_btn;
-	@FindBy(xpath = "//label[text()='Customer:']")public WebElement customer_lbl;
-	
-//	Actions
-	public void enterUsername(String username) {
-		username_txt.sendKeys(username);
-	}
-	public void enterpassword(String pwd) {
-		password_txt.sendKeys(pwd);
-	}
-	public void clickSignIn() {
-		signIn_btn.click();
-	}
-	public void clickForgot() {
-		forgot_lnk.click();
-	}
-	public void clickCreateNewAccLink() {
-		create_new_acc_lnk.click();
-	}
-	public void clickHome() {
-		home_btn.click();
-	}
-	public void clickFSupport() {
-		support_btn.click();
-	}
-	public void clickMarketplace() {
-		marketplace_btn.click();
-	}
-	public void clickAzureSSO() {
-		azure_SSO_btn.click();
-	}
-	public void clickGoogleSSO() {
-		google_SSO_btn.click();
-	}
-	
-	
-	
+    // ******************************************************************LOCATORS***************************************************************************************************************************************************************************
+
+    public By username_txt = By.id("loginForm:username");
+    public By password_txt = By.id("loginForm:password");
+    public By signIn_btn = By.id("loginForm:loginButton");
+    public By forgot_lnk = By.id("loginForm:forgot");
+    public By create_new_acc_lnk = By.id("loginForm:provisionURLLink");
+    public By home_btn = By.id("loginFormBottomButton:one");
+    public By support_btn = By.id("loginFormBottomButton:two");
+    public By marketplace_btn = By.id("loginFormBottomButton:marketLink");
+    public By azure_SSO_btn = By.id("loginForm:azureAD");
+    public By google_SSO_btn = By.id("loginForm:googlessologinForm:username");
+    public By customer_lbl = By.xpath("//label[text()='Customer:']");
+
+
+    // ******************************************************************ACTIONS***************************************************************************************************************************************************************************
+
+    public void enterUsername(String username) {
+        WebElement element = wait.waitForElementToBeClickable(username_txt);
+        element.clear();
+        element.sendKeys(username);
+    }
+
+    public void enterpassword(String pwd) {
+        WebElement element = wait.waitForElementToBeClickable(password_txt);
+        element.clear();
+        element.sendKeys(pwd);
+    }
+
+    public void clickSignIn() {
+        wait.waitForElementToBeClickable(signIn_btn).click();
+    }
+
+    public void clickForgot() {
+        wait.waitForElementToBeClickable(forgot_lnk).click();
+    }
+
+    public void clickCreateNewAccLink() {
+        wait.waitForElementToBeClickable(create_new_acc_lnk).click();
+    }
+
+    public void clickHome() {
+        wait.waitForElementToBeClickable(home_btn).click();
+    }
+
+    public void clickFSupport() {
+        wait.waitForElementToBeClickable(support_btn).click();
+    }
+
+    public void clickMarketplace() {
+        wait.waitForElementToBeClickable(marketplace_btn).click();
+    }
+
+    public void clickAzureSSO() {
+        wait.waitForElementToBeClickable(azure_SSO_btn).click();
+    }
+
+    public void clickGoogleSSO() {
+        wait.waitForElementToBeClickable(google_SSO_btn).click();
+    }
+
 }
+

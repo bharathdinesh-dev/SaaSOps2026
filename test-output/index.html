@@ -50,7 +50,7 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-Default_suite" class="navigator-link ">
-                    <span>C:\Users\dinesh\AppData\Local\Temp\testng-eclipse-408981876\testng-customsuite.xml</span>
+                    <span>C:\Users\dinesh\AppData\Local\Temp\testng-eclipse--198754838\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -130,15 +130,15 @@
                   </a> <!-- XMTFlowCreator -->
                   <span class="method-name">XMTFlowCreator</span>
                   <div class="stack-trace">org.openqa.selenium.StaleElementReferenceException: stale element reference: stale element not found in the current frame
-  (Session info: chrome=144.0.7559.110)
+  (Session info: chrome=144.0.7559.133)
 For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#staleelementreferenceexception
 Build info: version: &apos;4.38.0&apos;, revision: &apos;6b412e825c*&apos;
 System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;23.0.1&apos;
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [f94bdfbace69c6e621c177cc079ea973, clickElement {id=f.B83BA1241F6D688B6B05F2A52705AF28.d.336048A0CDA8742CF240F2CBCA49DF12.e.617}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 144.0.7559.110, chrome: {chromedriverVersion: 144.0.7559.133 (7da823b1d59..., userDataDir: C:\Users\dinesh\AppData\Loc...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52955}, goog:processID: 14320, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52955/devtoo..., se:cdpVersion: 144.0.7559.110, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Element: [[ChromeDriver: chrome on windows (f94bdfbace69c6e621c177cc079ea973)] -&gt; xpath: //button[contains(@id,&apos;selectsaasprofileFlowForm:create_application_profile_btn_slid&apos;)]]
-Session ID: f94bdfbace69c6e621c177cc079ea973
+Command: [8a9b511753152613bd2a5339aaa61dca, sendKeysToElement {value=[Ljava.lang.CharSequence;@3015db78, id=f.609CDAA103046830F9BB76F827D92886.d.EEB75D1CC2A2A437B67C06AA8D0A0A1D.e.628}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 144.0.7559.133, chrome: {chromedriverVersion: 144.0.7559.133 (7da823b1d59..., userDataDir: C:\Users\dinesh\AppData\Loc...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52810}, goog:processID: 8948, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52810/devtoo..., se:cdpVersion: 144.0.7559.133, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (8a9b511753152613bd2a5339aaa61dca)] -&gt; id: profilecreationForm:existingAppusername_input]
+Session ID: 8a9b511753152613bd2a5339aaa61dca
 	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
 	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:501)
 	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:485)
@@ -150,14 +150,10 @@ Session ID: f94bdfbace69c6e621c177cc079ea973
 	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
 	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:557)
 	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
-	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:76)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
-	at jdk.proxy2/jdk.proxy2.$Proxy28.click(Unknown Source)
-	at saasOpsPageObjects.SaasOperationsSetupPOC.clickSetupApplicationDropdown(SaasOperationsSetupPOC.java:71)
-	at saasOpsTestCase.XMTflowCreation.ApplicationProfileCreator(XMTflowCreation.java:39)
-	at saasOpsTestCase.XMTflowCreation.XMTFlowCreator(XMTflowCreation.java:16)
+	at org.openqa.selenium.remote.RemoteWebElement.sendKeys(RemoteWebElement.java:110)
+	at saasOpsPageObjects.SaasOperationsSetupPOC.enterAppName(SaasOperationsSetupPOC.java:137)
+	at saasOpsPageObjects.SaasOperationsSetupPOC.createApplicationProfile(SaasOperationsSetupPOC.java:60)
+	at saasOpsTestCase.XMTflowCreation.XMTFlowCreator(XMTflowCreation.java:33)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
@@ -193,7 +189,7 @@ Session ID: f94bdfbace69c6e621c177cc079ea973
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\dinesh\AppData\Local\Temp\testng-eclipse-408981876\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\dinesh\AppData\Local\Temp\testng-eclipse--198754838\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -250,12 +246,12 @@ data.addRows(1);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'XMTFlowCreator')
 data.setCell(0, 2, 'saasOpsTestCase.XMTflowCreation')
-data.setCell(0, 3, 19102);
+data.setCell(0, 3, 24950);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 19 seconds</span>
+              <span class="suite-total-time">Total running time: 24 seconds</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -290,7 +286,7 @@ return data;
                 <img src="failed.png">
                 </img>
                 <span class="method-name">XMTFlowCreator</span>
-                <span class="method-start">7604 ms</span>
+                <span class="method-start">6131 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

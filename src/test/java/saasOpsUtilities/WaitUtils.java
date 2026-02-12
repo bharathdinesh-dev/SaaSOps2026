@@ -2,6 +2,7 @@ package saasOpsUtilities;
 
 import java.time.Duration;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,22 +17,35 @@ public class WaitUtils {
         this.driver = driver;
     }
 
-    public void waitForVisibility(WebElement element) {
-        waitForVisibility(element, DEFAULT_WAIT);
+    // Wait for visibility (By)
+    public WebElement waitForVisibility(By locator) {
+        return waitForVisibility(locator, DEFAULT_WAIT);
     }
 
-    public void waitForVisibility(WebElement element, int seconds) {
-        new WebDriverWait(driver, Duration.ofSeconds(seconds))
-            .until(ExpectedConditions.visibilityOf(element));
-    }
-    public void waitForClikable(WebElement element) {
-    	waitForClikable(element, DEFAULT_WAIT);
+    public WebElement waitForVisibility(By locator, int seconds) {
+        return new WebDriverWait(driver, Duration.ofSeconds(seconds))
+                .until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-    public void waitForClikable(WebElement element, int seconds) {
-        new WebDriverWait(driver, Duration.ofSeconds(seconds))
-            .until(ExpectedConditions.elementToBeClickable(element));
+    // Wait for clickable (By)
+    public WebElement waitForElementToBeClickable(By locator) {
+        return waitForElementToBeClickable(locator, DEFAULT_WAIT);
     }
-    
+
+    public WebElement waitForElementToBeClickable(By locator, int seconds) {
+        return new WebDriverWait(driver, Duration.ofSeconds(seconds))
+                .until(ExpectedConditions.elementToBeClickable(locator));
+    }
+    public boolean isElementDisplayed(By locator, int seconds) {
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(seconds))
+                    .until(ExpectedConditions.visibilityOfElementLocated(locator));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }
+
 
