@@ -1,160 +1,180 @@
 package saasOpsPageObjects;
 
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class SaasOperationsSetupPOC extends BasePage{
+public class SaasOperationsSetupPOC extends BasePage {
 
-	public SaasOperationsSetupPOC(WebDriver driver){
-		super(driver);
-	}
-	
-//	******************************************************************LOCATORS***************************************************************************************************************************************************************************
-	
-//	Main menu and setup buttons
-	@FindBy(id="menuCLinkForm:appsaascCmdLink") public WebElement saas_operations_menu;
-	@FindBy(id="Open_create_application_profile_btn") public WebElement setup_application_profile_btn;
-	@FindBy(xpath="//button[contains(@id,'selectsaasprofileFlowForm:create_application_profile_btn_slid')]") public WebElement setup_application_profile_dropdown;
-	
-//	Flow selecting radios buttons
-	@FindBy(xpath = "//span[text()='My Application is Already Multi-tenant']/ancestor::div[contains(@class,'radioCard')]/child::div[contains(@class,'radio')]/div") public WebElement xmt_radio_btn;
-	@FindBy(xpath = "//span[text()='My Application is Single Tenant']/ancestor::div[contains(@class,'radioCard')]/child::div[contains(@class,'radio')]/div") public WebElement vt_radio_btn;
-	@FindBy(xpath = "//span[text()='On-Premises Installation']/ancestor::div[contains(@class,'radioCard')]/child::div[contains(@class,'radio')]/div") public WebElement onPremises_radio_btn;
-	@FindBy(xpath = "//span[text()='Commercials and Usage Based Operations']/ancestor::div[contains(@class,'radioCard')]/child::div[contains(@class,'radio')]/div") public WebElement commercial_radio_btn;
-	@FindBy(xpath = "//span[text()='AI Transformation for SaaS Application']/ancestor::div[contains(@class,'radioCard')]/child::div[contains(@class,'radio')]/div") public WebElement aify_radio_btn;
-	
-//	XMT,Service node & xaas dropdown options
-	@FindBy(xpath = "//a[@id='selectsaasprofileFlowForm:servicenodeover2' and @class='ui-commandlink ui-widget overlayHover']") public WebElement xmt_dropdown_option;
-	@FindBy(xpath = "//a[@id='selectsaasprofileFlowForm:servicenodecontainderrNo' and @class='ui-commandlink ui-widget overlayHover']") public WebElement sn_non_container_dropdown_option;
-	@FindBy(xpath = "//a[@id='selectsaasprofileFlowForm:servicenodecontainderr' and @class='ui-commandlink ui-widget overlayHover']") public WebElement sn_container_dropdown_option;
-	@FindBy(xpath = "//a[@id='selectsaasprofileFlowForm:saasmanaged' and @class='ui-commandlink ui-widget overlayHover']") public WebElement xaas_dropdown_option;
+    public SaasOperationsSetupPOC(WebDriver driver) {
+        super(driver);
+    }
 
-//	VT flow container and non container webelements
-	@FindBy(xpath = "//a[@id='selectsaasprofileFlowForm:saascontainerized1' and @class='ui-commandlink ui-widget overlayHover']") public WebElement vt_container_dropdown_option;
-	@FindBy(xpath = "//a[@id='selectsaasprofileFlowForm:saasnoncontainerized1' and @class='ui-commandlink ui-widget overlayHover']") public WebElement vt_non_container_dropdown_option;
+    // ******************************************************************
+    // LOCATORS
+    // ******************************************************************
 
-//	OnPremesis dropdown options
-	@FindBy(xpath = "//a[@id='selectsaasprofileFlowForm:rapidsaasmodel22' and @class='ui-commandlink ui-widget overlayHover']") public WebElement onPremesis_application_dropdown_option;
-	@FindBy(xpath = "//a[@id='selectsaasprofileFlowForm:dedicatedserver1' and @class='ui-commandlink ui-widget overlayHover']") public WebElement onPremesis_server_dropdown_option;
-	
-	
-//	Application profile creation webelements
-	@FindBy(id="profilecreationForm:existingClustername_input") public WebElement group_name_dropdown;
-	@FindBy(id="profilecreationForm:existingAppusername_input") public WebElement app_name_dropdown;
-	@FindBy(id="profilecreationForm:profilename") public WebElement profile_name_txt;
-	@FindBy(id="profilecreationForm:tagprofilecreationflow") public WebElement tag_name_dropdown;
-	@FindBy(xpath = "//li[text()='QA']") public WebElement qa_tag_name_dropdown;
-	@FindBy(xpath = "//li[text()='Staging']") public WebElement staging_tag_name_dropdown;
-	@FindBy(xpath = "//li[text()='Production']") public WebElement production_tag_name_dropdown;
-	
-//	Create application profile button
-	@FindBy(id="profilecreationForm:create_application_profile_sidebar") public WebElement create_Application_profile_btn;
-	
-//	******************************************************************ACTIONS***************************************************************************************************************************************************************************
+    public By saas_operations_menu = By.id("menuCLinkForm:appsaascCmdLink");
+    public By setup_application_profile_btn = By.id("Open_create_application_profile_btn");
+    public By setup_application_profile_dropdown =
+            By.xpath("//button[contains(@id,'selectsaasprofileFlowForm:create_application_profile_btn_slid')]");
 
-	//	Main menu and setup buttons
-	public void clickSaasOperationsMenu() {
-		saas_operations_menu.click();
-	}
-	
-	public void clickSetupApplicationBtn() {
-		setup_application_profile_btn.click();
-	}
-	
-	public void clickSetupApplicationDropdown() {
-		setup_application_profile_dropdown.click();
-	}
-	
-//	Flow selecting radios buttons 
-	public void clickXmtRadioBtn() {
-		xmt_radio_btn.click();
-	}
-	
-	public void clickVtRadioBtn() {
-		vt_radio_btn.click();
-	}
-	
-	public void clickOnPremisesRadioBtn() {
-		onPremises_radio_btn.click();
-	}
-	
-	public void clickCommercialRadioBtn() {
-		commercial_radio_btn.click();
-	}
-	
-	public void clickAifyRadioBtn() {
-		aify_radio_btn.click();
-	}
-	
-//	XMT,Service node & xaas dropdown options
-	public void clickXmtDropdownOption() {
-		xmt_dropdown_option.click();
-	}
-	
-	public void clickSnNonContainerDropdownOption() {
-		sn_non_container_dropdown_option.click();
-	}
-	
-	public void clickSnContainerDropdownOption() {
-		sn_container_dropdown_option.click();
-	}
-	
-	public void clickXaasDropdownOption() {
-		xaas_dropdown_option.click();
-	}
-	
-//	VT flow container and non container webelements
-	public void clickVtContainerDropdown() {
-		vt_container_dropdown_option.click();
-	}
-	public void clickVtNonContainerDropdown() {
-		vt_non_container_dropdown_option.click();
-	}
+    // Flow radios
+    public By xmt_radio_btn = By.xpath("//span[text()='My Application is Already Multi-tenant']/ancestor::div[contains(@class,'radioCard')]//div[contains(@class,'radio')]/div");
+    public By vt_radio_btn = By.xpath("//span[text()='My Application is Single Tenant']/ancestor::div[contains(@class,'radioCard')]//div[contains(@class,'radio')]/div");
 
-	
-//	OnPremesis dropdown options
-	public void clickOnPremesisApplicationDropdown() {
-		onPremesis_application_dropdown_option.click();
-	}
-	public void clickOnPremesisServerDropdown() {
-		onPremesis_server_dropdown_option.click();
-	}
+    // Flow options
+    public By xmt_dropdown_option = By.id("selectsaasprofileFlowForm:servicenodeover2");
+    public By vt_non_container_dropdown_option = By.id("selectsaasprofileFlowForm:saasnoncontainerized1");
 
-	
-//	Application profile creation webelements
-	public void enterGroupName(String grpName) {
-		group_name_dropdown.click();
-		group_name_dropdown.clear();
-		group_name_dropdown.sendKeys(grpName);
-	}
-	public void enterAppName(String appName) {
-		app_name_dropdown.click();
-		app_name_dropdown.clear();
-		app_name_dropdown.sendKeys(appName);
-	}
-	public void enterProfileName(String profileName) {
-		profile_name_txt.click();
-		profile_name_txt.clear();
-		profile_name_txt.sendKeys(profileName);
-	}
-	public void clickTagDropdown() {
-		tag_name_dropdown.click();
-	}
-	public void clickQaTagDropdown() {
-		qa_tag_name_dropdown.click();
-	}
-	public void clickStaggingTagDropdown() {
-		staging_tag_name_dropdown.click();
-	}
-	public void clickProductionTagDropdown() {
-		production_tag_name_dropdown.click();
-	}
-	
-//	Create application profile button
-	public void clickCreateApplicationProfile() {
-		create_Application_profile_btn.click();
-	}
-	
-	
+    // Profile fields
+    public By group_name_dropdown = By.id("profilecreationForm:existingClustername_input");
+    public By app_name_dropdown = By.id("profilecreationForm:existingAppusername_input");
+    public By profile_name_txt = By.id("profilecreationForm:profilename");
+    public By tag_name_dropdown = By.id("profilecreationForm:tagprofilecreationflow");
+
+    public By qa_tag_name_dropdown = By.xpath("//li[text()='QA']");
+    public By staging_tag_name_dropdown = By.xpath("//li[text()='Staging']");
+    public By production_tag_name_dropdown = By.xpath("//li[text()='Production']");
+
+    public By create_Application_profile_btn =
+            By.id("profilecreationForm:create_application_profile_sidebar");
+
+    // ******************************************************************
+    // BUSINESS METHOD (Complete Flow)
+    // ******************************************************************
+
+    public void createApplicationProfile(String flowName,
+                                         String flowOption,
+                                         String groupName,
+                                         String appName,
+                                         String profileName,
+                                         String tagName,
+                                         String zone) {
+
+        openApplicationProfileSetup(zone);
+        selectFlow(flowName);
+        selectFlowOption(flowOption);
+
+        enterGroupName(groupName);
+        enterAppName(appName);
+        enterProfileName(profileName);
+
+        selectTag(tagName);
+
+        clickCreateApplicationProfile();
+    }
+
+    // ******************************************************************
+    // ACTION METHODS
+    // ******************************************************************
+
+    public void openApplicationProfileSetup(String zone) {
+
+        // Click SaaS Operations menu
+        wait.waitForElementToBeClickable(saas_operations_menu,20).click();
+        
+     // Check if setup button is present
+	    if(zone.equalsIgnoreCase("new")) {
+	    	System.out.println("Setup button not available. Radios already displayed.");
+	    } else {
+	    	wait.waitForElementToBeClickable(setup_application_profile_btn).click();
+	    }
+        
+    }
+
+
+    public void selectFlow(String flowName) {
+
+        switch (flowName.toLowerCase()) {
+
+            case "xmtflow":
+                wait.waitForElementToBeClickable(xmt_radio_btn).click();
+                break;
+
+            case "vtflow":
+                wait.waitForElementToBeClickable(vt_radio_btn).click();
+                break;
+
+            default:
+                throw new IllegalArgumentException("Invalid flow name: " + flowName);
+        }
+        try {
+        wait.waitForElementToBeClickable(setup_application_profile_dropdown).click();}
+        catch(StaleElementReferenceException st) {
+        	System.out.println(st.getStackTrace());
+        	wait.waitForElementToBeClickable(setup_application_profile_dropdown).click();
+        }
+    }
+
+    public void selectFlowOption(String flowOption) {
+
+        switch (flowOption.toLowerCase()) {
+
+            case "cloudmanagement":
+                wait.waitForElementToBeClickable(xmt_dropdown_option).click();
+                break;
+
+            case "noncontainer":
+                wait.waitForElementToBeClickable(vt_non_container_dropdown_option).click();
+                break;
+
+            default:
+                throw new IllegalArgumentException("Invalid flow option: " + flowOption);
+        }
+    }
+
+    public void enterGroupName(String groupName) {
+        WebElement group = wait.waitForElementToBeClickable(group_name_dropdown);
+        group.clear();
+        group.sendKeys(groupName);
+//        need to validate value is added 
+        new WebDriverWait(driver,Duration.ofSeconds(10)).until(ExpectedConditions.attributeToBe(group_name_dropdown, "value", groupName));
+    }
+
+    public void enterAppName(String appName) {
+        wait.waitForElementToBeClickable(app_name_dropdown);
+        driver.findElement(app_name_dropdown).clear();
+        wait.waitForElementToBeClickable(app_name_dropdown);
+        driver.findElement(app_name_dropdown).sendKeys(appName);
+    }
+
+    public void enterProfileName(String profileName) {
+        wait.waitForElementToBeClickable(profile_name_txt);
+        driver.findElement(profile_name_txt).clear();
+        wait.waitForElementToBeClickable(profile_name_txt);
+        driver.findElement(profile_name_txt).sendKeys(profileName);
+    }
+
+    public void selectTag(String tagName) {
+
+        wait.waitForElementToBeClickable(tag_name_dropdown).click();
+
+        switch (tagName.toLowerCase()) {
+
+            case "qa":
+                wait.waitForElementToBeClickable(qa_tag_name_dropdown).click();
+                break;
+
+            case "staging":
+                wait.waitForElementToBeClickable(staging_tag_name_dropdown).click();
+                break;
+
+            case "production":
+                wait.waitForElementToBeClickable(production_tag_name_dropdown).click();
+                break;
+
+            default:
+                throw new IllegalArgumentException("Invalid tag name: " + tagName);
+        }
+    }
+
+    public void clickCreateApplicationProfile() {
+        wait.waitForElementToBeClickable(create_Application_profile_btn).click();
+    }
 }
