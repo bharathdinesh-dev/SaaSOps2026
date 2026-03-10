@@ -2,6 +2,7 @@ package saasOpsPageObjects;
 
 import java.time.Duration;
 
+import org.jspecify.annotations.Nullable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -129,50 +130,122 @@ public class SaasOperationsSetupPOC extends BasePage {
         }
     }
 
+//    public void enterGroupName(String groupName) {
+//        WebElement group = wait.waitForElementToBeClickable(group_name_dropdown);
+//        group.clear();
+//        group.sendKeys(groupName);
+////        need to validate value is added 
+//        new WebDriverWait(driver,Duration.ofSeconds(10)).until(ExpectedConditions.attributeToBe(group_name_dropdown, "value", groupName));
+//    }
+//
+//    public void enterAppName(String appName) {
+//        wait.waitForElementToBeClickable(app_name_dropdown);
+//        driver.findElement(app_name_dropdown).clear();
+//        wait.waitForElementToBeClickable(app_name_dropdown);
+//        driver.findElement(app_name_dropdown).sendKeys(appName);
+//    }
+//
+//    public void enterProfileName(String profileName) {
+//        wait.waitForElementToBeClickable(profile_name_txt);
+//        driver.findElement(profile_name_txt).clear();
+//        wait.waitForElementToBeClickable(profile_name_txt);
+//        driver.findElement(profile_name_txt).sendKeys(profileName);
+//    }
     public void enterGroupName(String groupName) {
-        WebElement group = wait.waitForElementToBeClickable(group_name_dropdown);
-        group.clear();
-        group.sendKeys(groupName);
-//        need to validate value is added 
-        new WebDriverWait(driver,Duration.ofSeconds(10)).until(ExpectedConditions.attributeToBe(group_name_dropdown, "value", groupName));
+        enterTextWithRetry(group_name_dropdown, groupName);
     }
 
     public void enterAppName(String appName) {
-        wait.waitForElementToBeClickable(app_name_dropdown);
-        driver.findElement(app_name_dropdown).clear();
-        wait.waitForElementToBeClickable(app_name_dropdown);
-        driver.findElement(app_name_dropdown).sendKeys(appName);
+        enterTextWithRetry(app_name_dropdown, appName);
     }
 
     public void enterProfileName(String profileName) {
-        wait.waitForElementToBeClickable(profile_name_txt);
-        driver.findElement(profile_name_txt).clear();
-        wait.waitForElementToBeClickable(profile_name_txt);
-        driver.findElement(profile_name_txt).sendKeys(profileName);
+        enterTextWithRetry(profile_name_txt, profileName);
     }
+
+//    public void enterTag(String tag) {
+//        enterTextWithRetry(tag_name_dropdown, tag);
+//    }
+
+    public void enterTextWithRetry(By locator, String value) {
+
+        int attempts = 0;
+
+        while (attempts < 3) {
+
+            try {
+                WebElement element = wait.waitForElementToBeClickable(locator, 20);
+
+                element.clear();
+
+                // Re-locate again before sendKeys
+                element = wait.waitForElementToBeClickable(locator, 20);
+
+                element.sendKeys(value);
+
+                // Validate value
+                String actualValue = driver.findElement(locator).getAttribute("value");
+
+                if (actualValue.equals(value)) {
+                    return;
+                }
+
+            } catch (org.openqa.selenium.StaleElementReferenceException e) {
+                // Just retry
+            }
+
+            attempts++;
+        }
+
+        throw new RuntimeException("Failed to enter text after retries: " + locator);
+    }
+
+
 
     public void selectTag(String tagName) {
 
-        wait.waitForElementToBeClickable(tag_name_dropdown).click();
+        By selectedTag;
 
         switch (tagName.toLowerCase()) {
 
             case "qa":
-                wait.waitForElementToBeClickable(qa_tag_name_dropdown).click();
+                selectedTag = qa_tag_name_dropdown;
                 break;
 
             case "staging":
-                wait.waitForElementToBeClickable(staging_tag_name_dropdown).click();
+                selectedTag = staging_tag_name_dropdown;
                 break;
 
             case "production":
-                wait.waitForElementToBeClickable(production_tag_name_dropdown).click();
+                selectedTag = production_tag_name_dropdown;
                 break;
 
             default:
                 throw new IllegalArgumentException("Invalid tag name: " + tagName);
         }
+
+        clickWithRetry(tag_name_dropdown);
+        clickWithRetry(selectedTag);
     }
+    private void clickWithRetry(By locator) {
+
+        int attempts = 0;
+
+        while (attempts < 3) {
+
+            try {
+                wait.waitForElementToBeClickable(locator, 20).click();
+                return; // success
+            } 
+            catch (org.openqa.selenium.StaleElementReferenceException e) {
+                attempts++;
+            }
+        }
+
+        throw new RuntimeException("Unable to click element after retries: " + locator);
+    }
+
+
 
     public void clickCreateApplicationProfile() {
         wait.waitForElementToBeClickable(create_Application_profile_btn).click();
