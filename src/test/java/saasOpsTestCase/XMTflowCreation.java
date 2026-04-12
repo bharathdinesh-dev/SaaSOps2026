@@ -33,11 +33,6 @@ public class XMTflowCreation extends SaasOpsBaseClass {
         saasOperationsObj.createApplicationProfile(
                 p.getProperty("XMT_flow"),
                 p.getProperty("XMT_flowOption"),
-                p.getProperty("XMT_group_name")+randomNumber,
-                p.getProperty("XMT_app_name")+randomNumber,
-//                Profile and tag removed from UI 
-//                p.getProperty("XMT_profile_name")+randomNumber,
-//                p.getProperty("XMT_qa_tag"),
                 p.getProperty("XMT_group_name")+randomNumber(3),
                 p.getProperty("XMT_app_name")+randomNumber(3),
                 p.getProperty("XMT_profile_name")+randomNumber(3),
