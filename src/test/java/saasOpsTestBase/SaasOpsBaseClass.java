@@ -18,11 +18,9 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
-import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -45,7 +43,6 @@ public class SaasOpsBaseClass {
 	public ZoneWelcomePOC welcomeObj;
 	public ZoneSubscriptionPage subObj;
 	public String mfa_time;
-	ChromeOptions options;
 	
 	@BeforeClass
 	public void setup() throws IOException {
@@ -56,9 +53,6 @@ public class SaasOpsBaseClass {
 		
 //		Initiate logs
 		logger=LogManager.getLogger(this.getClass());
-		
-		options = new ChromeOptions();
-		options.setPageLoadStrategy(PageLoadStrategy.EAGER);
 		
 //		initiate driver 
 		driver = new ChromeDriver();

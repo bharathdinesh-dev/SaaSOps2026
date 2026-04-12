@@ -2,7 +2,6 @@ package saasOpsPageObjects;
 
 import java.time.Duration;
 
-import org.jspecify.annotations.Nullable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -268,10 +267,26 @@ public class SaasOperationsSetupPOC extends BasePage {
 
     public boolean enterAppName(String appName) {
         return enterAutoCompleteField(app_name_dropdown, appName);
+    public void enterGroupName(String groupName) {
+        WebElement group = wait.waitForElementToBeClickable(group_name_dropdown);
+        group.clear();
+        group.sendKeys(groupName);
+//        need to validate value is added 
+        new WebDriverWait(driver,Duration.ofSeconds(10)).until(ExpectedConditions.attributeToBe(group_name_dropdown, "value", groupName));
+    }
+
+    public void enterAppName(String appName) {
+        wait.waitForElementToBeClickable(app_name_dropdown);
+        driver.findElement(app_name_dropdown).clear();
+        wait.waitForElementToBeClickable(app_name_dropdown);
+        driver.findElement(app_name_dropdown).sendKeys(appName);
     }
 /*	Profile and tag removed from UI
     public void enterProfileName(String profileName) {
-        enterTextWithRetry(profile_name_txt, profileName);
+        wait.waitForElementToBeClickable(profile_name_txt);
+        driver.findElement(profile_name_txt).clear();
+        wait.waitForElementToBeClickable(profile_name_txt);
+        driver.findElement(profile_name_txt).sendKeys(profileName);
     }
 
     public void enterTag(String tag) {
@@ -281,28 +296,25 @@ public class SaasOperationsSetupPOC extends BasePage {
     
     public void selectTag(String tagName) {
 
-        By selectedTag;
+        wait.waitForElementToBeClickable(tag_name_dropdown).click();
 
         switch (tagName.toLowerCase()) {
 
             case "qa":
-                selectedTag = qa_tag_name_dropdown;
+                wait.waitForElementToBeClickable(qa_tag_name_dropdown).click();
                 break;
 
             case "staging":
-                selectedTag = staging_tag_name_dropdown;
+                wait.waitForElementToBeClickable(staging_tag_name_dropdown).click();
                 break;
 
             case "production":
-                selectedTag = production_tag_name_dropdown;
+                wait.waitForElementToBeClickable(production_tag_name_dropdown).click();
                 break;
 
             default:
                 throw new IllegalArgumentException("Invalid tag name: " + tagName);
         }
-
-        clickWithRetry(tag_name_dropdown);
-        clickWithRetry(selectedTag);
     }
     private void clickWithRetry(By locator) {
 
