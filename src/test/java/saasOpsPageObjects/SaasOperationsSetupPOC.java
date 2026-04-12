@@ -102,7 +102,7 @@ public class SaasOperationsSetupPOC extends BasePage {
     		selectFlow(flowName);
     		selectFlowOption(flowOption);
 
-    		boolean isGroupEntered = enterGroupName(groupName);
+    		boolean isGroupEntered = enterGroupName1(groupName);
 
     		if (!isGroupEntered) {
     			System.out.println("Group Name not entered");
@@ -110,7 +110,7 @@ public class SaasOperationsSetupPOC extends BasePage {
     		}
 
     		// ✅ Only executes if above is successful
-    		boolean isAppEntered =enterAppName(appName);
+    		boolean isAppEntered =enterAppName1(appName);
     		
     		if (!isAppEntered) {
     			System.out.println("App Name not entered correctly");
@@ -261,12 +261,12 @@ public class SaasOperationsSetupPOC extends BasePage {
 //        wait.waitForElementToBeClickable(profile_name_txt);
 //        driver.findElement(profile_name_txt).sendKeys(profileName);
 //    }
-    public boolean enterGroupName(String groupName) {
+    public boolean enterGroupName1(String groupName) {
         return enterAutoCompleteField(group_name_dropdown, groupName);
     }
 
-    public boolean enterAppName(String appName) {
-        return enterAutoCompleteField(app_name_dropdown, appName);
+    public boolean enterAppName1(String appName) {
+        return enterAutoCompleteField(app_name_dropdown, appName);}
     public void enterGroupName(String groupName) {
         WebElement group = wait.waitForElementToBeClickable(group_name_dropdown);
         group.clear();
