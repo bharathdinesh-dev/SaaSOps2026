@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class WaitUtils {
 
     private WebDriver driver;
-    private static final int DEFAULT_WAIT = 15;
+    private static final int DEFAULT_WAIT = 10;
 
     public WaitUtils(WebDriver driver) {
         this.driver = driver;
